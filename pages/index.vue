@@ -10,7 +10,7 @@ const changeMode = () => {
 <template>
     <div class="text-red">
         Hello {{ x }} {{ y }}
-        
+
         <button @click="changeMode">{{ $colorMode.value }}</button>
     </div>
 </template>
