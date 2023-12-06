@@ -9,15 +9,27 @@ const props = defineProps<{
 const root = ref<HTMLDivElement>()
 const terminal = new Terminal()
 
-const stream = new WritableStream({
-  write(chunk) {
-    terminal.write(chunk)
-  }
-})
+// const stream = new WritableStream({
+//   write(chunk) {
+//     terminal.write(chunk)
+//   }
+// })
 
 watch(() => props.stream, (s) => {
-  s?.pipeTo(stream)
-}, { immediate: true })
+  if (!s)
+    return
+  const reader = s.getReader()
+
+  function read() {
+    reader.read().then(({ done, value }) => {
+      terminal.write(value)
+      if (!done)
+        read()
+    })
+  }
+  read()
+}, { flush: 'sync', immediate: true }
+)
 
 onMounted(() => {
   terminal.open(root.value)
@@ -25,5 +37,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="root" class="root"></div>
+  <div ref="root"></div>
 </template>

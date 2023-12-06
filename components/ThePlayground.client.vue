@@ -9,6 +9,27 @@ const error = shallowRef<{ message: string; }>()
 const stream = ref<ReadableStream>()
 
 async function startDevServer() {
+
+  const rowFiles = import.meta.glob([
+    '../templates/basic/*.*',
+    '!**node_modules/**'
+  ], {
+    as: 'raw',
+    eager: true,
+  })
+
+  const files = Object.fromEntries(
+    Object.entries(rowFiles).map(([path, content]) => {
+      return [path.replace('../templates/basic/', ''), {
+        file: {
+          contents: content
+        }
+      }]
+    })
+  )
+
+  console.log(files);
+
   const wc = await useWebContainer()
 
   wc.on('server-ready', (port, url) => {
@@ -22,18 +43,7 @@ async function startDevServer() {
 
   status.value = 'mount'
 
-  await wc.mount({
-    'package.json': {
-      file: {
-        contents: JSON.stringify({
-          private: true,
-          dependencies: {
-            'nuxt': 'latest',
-          }
-        }, null, 2),
-      }
-    }
-  })
+  await wc.mount(files)
 
   status.value = 'install'
   const installProcess = await wc.spawn('pnpm', ['install']);
@@ -63,7 +73,7 @@ onMounted(startDevServer)
 
 <template>
   <div h-full w-full grid="~ rows-[2fr_1fr]" of-hidden>
-    <iframe v-show="status === 'ready'" ref="iframe"></iframe>
+    <iframe w-full h-full v-show="status === 'ready'" ref="iframe"></iframe>
     <div v-if="status !== 'ready'" flex="~ col items-center justify-center" capitalize>
       <div svg-spinners:8-dots-rotate></div>
       {{ status }}ing...
