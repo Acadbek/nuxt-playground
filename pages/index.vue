@@ -9,7 +9,7 @@ function changeMode() {
 
 <template>
   <div class="grid grid-cols-[1fr_2fr] h-full overflow-hidden">
-    <div class="border-r border-base p4">
+    <div>
       Content
       <div class="text-red">
         Hello {{ x }} {{ y }}
@@ -19,9 +19,7 @@ function changeMode() {
         </button>
       </div>
     </div>
-    <div class="border-r border-base p4">
-      Playground
-    </div>
+    <ThePlayground />
   </div>
 </template>
 
