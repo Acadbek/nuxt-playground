@@ -60,6 +60,12 @@ async function startDevServer() {
   status.value = 'start'
   const devProcess = await wc.spawn('pnpm', ['run', 'dev']);
   stream.value = devProcess.output
+
+  if (import.meta.hot) {
+    import.meta.hot.accept(() => {
+      devProcess.kill()
+    })
+  }
 }
 
 watchEffect(() => {

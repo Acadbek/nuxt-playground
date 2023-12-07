@@ -1,6 +1,6 @@
 <template>
-  <nav class="w-full h-screen h-100dvh">
+  <div class="w-full h-screen h-100dvh of-hidden" bg-base grid="~ rows-[max-content_1fr]">
     <TheNav />
     <slot />
-  </nav>
+  </div>
 </template>
