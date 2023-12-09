@@ -12,7 +12,7 @@
     "format": "eslint . --fix"
   },
   "dependencies": {
-    "@unocss/nuxt": "^0.57.7",
+    "@unocss/nuxt": "^0.58.0",
     "@vueuse/nuxt": "^10.6.1",
     "@webcontainer/api": "^1.1.8",
     "xterm": "^5.3.0",
