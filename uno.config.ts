@@ -1,4 +1,12 @@
-import { defineConfig, presetAttributify, presetIcons, presetUno, transformerDirectives } from 'unocss'
+import {
+  defineConfig,
+  presetTypography,
+  presetAttributify,
+  presetIcons,
+  presetWebFonts,
+  presetUno,
+  transformerDirectives
+} from 'unocss'
 
 export default defineConfig({
   shortcuts: {
@@ -10,6 +18,14 @@ export default defineConfig({
     presetUno(),
     presetIcons(),
     presetAttributify(),
+    presetWebFonts({
+      provider: 'bunny',
+      fonts: {
+        'sans': 'DM Sans',
+        'mono': 'DM Mono'
+      }
+    }),
+    presetTypography()
   ],
   transformers: [
     transformerDirectives()
