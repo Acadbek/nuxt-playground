@@ -4,7 +4,6 @@ import '@unocss/reset/tailwind.css'
 
 <template>
   <NuxtLayout>
-    <h1>New title</h1>
     <NuxtPage />
   </NuxtLayout>
 </template>
@@ -18,6 +17,6 @@ html,
 body {
   height: 100vh;
   overflow: hidden;
-  --uno: bg-base;
+  --uno: bg-base, font-sans;
 }
 </style>
