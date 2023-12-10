@@ -6,7 +6,8 @@
     </NuxtLink>
     <div flex-auto />
     <ColorSchemeToggle />
-    <NuxtLink p2 rounded hover="bg-active" href="https://github.com/nuxt/learn.nuxt.com" target="_blank">
+    <NuxtLink title="acadbek/nuxt-playground" p2 rounded hover="bg-active"
+      href="https://github.com/acadbek/nuxt-playground" target="_blank">
       <div i-carbon-logo-github text-2xl />
     </NuxtLink>
   </div>
