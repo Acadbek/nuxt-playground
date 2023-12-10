@@ -38,6 +38,7 @@ useResizeObserver(root, useDebounceFn(() => fitAddon.fit(), 100))
 
 onMounted(() => {
   terminal.open(root.value!)
+  fitAddon.fit()
 })
 </script>
 

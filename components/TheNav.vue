@@ -3,12 +3,8 @@
     <div i-logos-nuxt-icon text-4xl />
     <span text-2xl>learn.nuxt.com</span>
     <div flex-auto />
-    <NuxtLink
-      p2 rounded
-      hover="bg-active"
-      href="https://github.com/nuxt/learn.nuxt.com"
-      target="_blank"
-    >
+    <ColorSchemeToggle />
+    <NuxtLink p2 rounded hover="bg-active" href="https://github.com/nuxt/learn.nuxt.com" target="_blank">
       <div i-carbon-logo-github text-2xl />
     </NuxtLink>
   </div>
