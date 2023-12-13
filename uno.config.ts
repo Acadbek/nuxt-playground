@@ -1,10 +1,10 @@
 import {
+  presetUno,
+  presetIcons,
   defineConfig,
+  presetWebFonts,
   presetTypography,
   presetAttributify,
-  presetIcons,
-  presetWebFonts,
-  presetUno,
   transformerDirectives
 } from 'unocss'
 
