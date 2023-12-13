@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Splitpanes, Pane } from "splitpanes";
+
 const iframe = ref<HTMLIFrameElement>();
 const wcUrl = ref<string>();
 
@@ -10,8 +12,8 @@ const stream = ref<ReadableStream>();
 
 async function startDevServer() {
   const tree = globFilesToWebContainerFs(
-    "../templates/nitro/",
-    import.meta.glob(["../templates/nitro/**/*.*", "!**node_modules/**"], {
+    "../templates/basic/",
+    import.meta.glob(["../templates/basic/**/*.*", "!**node_modules/**"], {
       as: "raw",
       eager: true,
     })
@@ -55,13 +57,6 @@ async function startDevServer() {
   }
 }
 
-function sendMessage() {
-  if (!iframe.value) {
-    return;
-  }
-  iframe.value.contentWindow?.postMessage("hello", "*");
-}
-
 watchEffect(() => {
   if (iframe.value && wcUrl.value) iframe.value.src = wcUrl.value;
 });
@@ -70,19 +65,25 @@ onMounted(startDevServer);
 </script>
 
 <template>
-  <div h-full w-full grid="~ rows-[2fr_1fr]" of-hidden>
-    <iframe w-full h-full v-show="status === 'ready'" ref="iframe"></iframe>
-    <div
-      v-if="status !== 'ready'"
-      flex="~ col items-center justify-center"
-      capitalize
-    >
-      <div svg-spinners:8-dots-rotate></div>
-      {{ status }}ing...
-    </div>
-    <TerminalOutput :stream="stream" h-full />
-    <button @click="postMessage">click me</button>
-  </div>
+  <Splitpanes h-full w-full of-hidden horizontal>
+    <Pane> [Editor] </Pane>
+    <Pane>
+      <iframe w-full h-full v-show="status === 'ready'" ref="iframe"></iframe>
+    </Pane>
+    <Pane>
+      <div
+        v-if="status !== 'ready'"
+        flex="~ col items-center justify-center"
+        capitalize
+      >
+        <div svg-spinners:8-dots-rotate></div>
+        {{ status }}ing...
+      </div>
+    </Pane>
+    <Pane>
+      <TerminalOutput :stream="stream" h-full />
+    </Pane>
+  </Splitpanes>
 </template>
 
 

@@ -1,0 +1,13 @@
+.splitpanes--vertical>.splitpanes__splitter {
+  --uno: border border-base;
+  border-width: 2px;
+}
+
+.splitpanes--horizontal>.splitpanes__splitter {
+  --uno: border border-base;
+  border-width: 2px;
+}
+
+.splitpanes--vertical .splitpanes__pane {
+  transition: none;
+}
